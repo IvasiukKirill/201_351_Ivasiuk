@@ -26,7 +26,7 @@ void Character::on_pushButton_3_clicked()
     pers temp;
     temp.type = ui->type->text();
     temp.hp = ui->hp->text();
-    temp.range = ui->range->text().toFloat();
+    temp.range = ui->range->text().toDouble();
 
     add_to_vector(temp);
 }
@@ -43,7 +43,9 @@ void Character::add_to_vector(pers temp)
     QByteArray checksum = QCryptographicHash::hash(dataForChecksum.toUtf8(), QCryptographicHash::Sha256);
 
     characters.append({temp.type, temp.hp, temp.range, checksum.toHex()});
+    qDebug() <<   temp.type <<  temp.hp << temp.range << checksum.toHex();
 }
+
 
 
 
@@ -60,25 +62,6 @@ void Character::displayCharacter(int index)
     // Добавьте свой код для отображения данных персонажа
 }
 
-void Character::on_previousButton_clicked()
-{
-
-}
-
-void Character::on_nextButton_clicked()
-{
-    if (!characters.isEmpty()) {
-        if (currentCharacterIndex < characters.size() - 1) {
-            currentCharacterIndex++;
-            displayCharacter(currentCharacterIndex);
-        } else {
-            // Возможно, вы хотите вывести предупреждение о том, что это последний персонаж.
-            // Например: qDebug() << "Это последний персонаж.";
-            qDebug() << "Это последний персонаж.";
-            clearFields();
-        }
-    }
-}
 
 void Character::clearFields()
 {
@@ -89,18 +72,32 @@ void Character::clearFields()
 }
 
 
+
+void Character::on_next_clicked()
+{
+    clearFields(); // Очистка полей перед отображением следующего персонажа
+    if (!characters.isEmpty()) {
+        if (currentCharacterIndex < characters.size() ) {
+            currentCharacterIndex++;
+            displayCharacter(currentCharacterIndex);
+            qDebug() << currentCharacterIndex;
+        } else {
+            qDebug() << "Это последний персонаж.";
+        }
+    }
+}
+
 void Character::on_pushButton_clicked()
 {
+    clearFields(); // Очистка полей перед отображением предыдущего персонажа
     if (!characters.isEmpty()) {
         if (currentCharacterIndex > 0) {
             currentCharacterIndex--;
             displayCharacter(currentCharacterIndex);
         } else {
-            // Возможно, вы хотите вывести предупреждение о том, что это первый персонаж.
-            // Например: qDebug() << "Это первый персонаж.";
             qDebug() << "Это первый персонаж.";
-            clearFields();
         }
     }
 }
+
 

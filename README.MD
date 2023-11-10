@@ -28,7 +28,7 @@
 приложени
 
 ## Снимки экрана
-![Alt text](image.png)
-![Alt text](image-1.png)
-![Alt text](image-2.png)
+![Alt text](https://sun9-61.userapi.com/impg/vJ6aEnSnhZx62cDD_c3_trn8haJSFZRkMiusGg/979ABWXFI3A.jpg?size=501x407&quality=96&sign=c20fdc822b85726b9dac8ba08696ca69&type=album)
+![Alt text](https://sun9-48.userapi.com/impg/qYErlihiQI-L6dUPGXZpQfsoLNwgHv2wNAiMlw/mdaJwAu1CL0.jpg?size=499x405&quality=96&sign=efa71db8cdd6bc314fa68dd7853934d0&type=album)
+![Alt text](https://sun9-10.userapi.com/impg/-CLG0rifboeujRiamk3gLIA-KdGFx_royqSK1Q/J7t_YNDk0HA.jpg?size=500x403&quality=96&sign=3acd4dbacf05ec99521d5b203bdce3eb&type=album)
 

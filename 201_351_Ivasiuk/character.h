@@ -16,9 +16,8 @@ public:
     struct pers{
         // объявление структуры character
         QString type;
-        QString hp;
+        int hp;
         double range;
-        QString checksum;
     };
     ~Character();
 

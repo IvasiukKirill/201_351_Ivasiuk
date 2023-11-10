@@ -25,25 +25,25 @@ void Character::on_pushButton_3_clicked()
 {
     pers temp;
     temp.type = ui->type->text();
-    temp.hp = ui->hp->text();
-    temp.range = ui->range->text().toDouble();
+    temp.hp = ui->hp->text().toInt();
+    temp.range = ui->range->value();
 
     add_to_vector(temp);
+
+    qDebug() << "on_pushButton_3_clicked: Added character. New index:" << currentCharacterIndex;
 }
 
 
 
-
-QString cryptographicSalt = "your_cryptographic_salt";
-
 void Character::add_to_vector(pers temp)
 {
 
-    QString dataForChecksum = temp.type + temp.hp + QString::number(temp.range) + cryptographicSalt;
-    QByteArray checksum = QCryptographicHash::hash(dataForChecksum.toUtf8(), QCryptographicHash::Sha256);
 
-    characters.append({temp.type, temp.hp, temp.range, checksum.toHex()});
-    qDebug() <<   temp.type <<  temp.hp << temp.range << checksum.toHex();
+    characters.append({temp.type, temp.hp, temp.range});
+    currentCharacterIndex++;
+
+    clearFields(); // Очистка полей перед отображением следующего персонажа
+
 }
 
 
@@ -55,9 +55,10 @@ void Character::displayCharacter(int index)
     // для отображения данных текущего персонажа в соответствующих полях формы.
 
     // Пример:
+//    qDebug() << index;
     ui->type->setText(characters[index].type);
-    ui->hp->setText(characters[index].hp);
-    ui->range->setText(QString::number(characters[index].range));
+    ui->hp->setValue(characters[index].hp);
+    ui->range->setValue(characters[index].range);
 
     // Добавьте свой код для отображения данных персонажа
 }
@@ -75,27 +76,28 @@ void Character::clearFields()
 
 void Character::on_next_clicked()
 {
-    clearFields(); // Очистка полей перед отображением следующего персонажа
     if (!characters.isEmpty()) {
-        if (currentCharacterIndex < characters.size() ) {
+        if (currentCharacterIndex < characters.size() - 1) {
+            clearFields(); // Очистка полей перед отображением следующего персонажа
             currentCharacterIndex++;
             displayCharacter(currentCharacterIndex);
             qDebug() << currentCharacterIndex;
         } else {
-            qDebug() << "Это последний персонаж.";
+            currentCharacterIndex++;
+            clearFields();
         }
     }
 }
 
 void Character::on_pushButton_clicked()
 {
-    clearFields(); // Очистка полей перед отображением предыдущего персонажа
     if (!characters.isEmpty()) {
         if (currentCharacterIndex > 0) {
+            clearFields(); // Очистка полей перед отображением предыдущего персонажа
             currentCharacterIndex--;
             displayCharacter(currentCharacterIndex);
         } else {
-            qDebug() << "Это первый персонаж.";
+//            qDebug() << "Это первый персонаж.";
         }
     }
 }
